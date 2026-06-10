@@ -6,6 +6,7 @@
     <q-input
       v-model="model"
       outlined
+      rounded
       bg-color="white"
       placeholder="Name of Town, postcode..."
       dense
