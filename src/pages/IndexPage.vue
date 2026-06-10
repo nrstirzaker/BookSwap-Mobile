@@ -1,12 +1,21 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <div>
-      <h1 class="text-h2">Hello Quasar with Tailwind CSS!</h1>
-      <p class="text-lg">
-        This is a sample page to test the installtion of Tailwind CSS with Quasar Framework.
-      </p>
+  <q-page class="bg-grey-1">
+    <div class="q-pa-md q-gutter-sm"></div>
+
+    <div class="q-pa-md row items-center justify-between">
+      <q-avatar>
+        <img src="https://cdn.quasar.dev/img/avatar.png" />
+      </q-avatar>
+      <q-btn round flat icon="menu" />
     </div>
+
+    <SearchHeader v-model="searchQuery" />
   </q-page>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue';
+import SearchHeader from 'components/SearchHeader.vue';
+
+const searchQuery = ref('');
+</script>
