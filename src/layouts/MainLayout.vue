@@ -15,8 +15,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import MainHeader from 'components/MainHeader.vue';
-import NavigationDrawer from 'components/NavigationDrawer.vue';
+import { MainHeader, NavigationDrawer } from '@components';
 
 const leftDrawerOpen = ref(false);
 

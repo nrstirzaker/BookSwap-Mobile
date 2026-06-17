@@ -33,33 +33,7 @@
 </template>
 
 <script setup lang="ts">
+import { menuList } from '@constants';
+
 const drawerState = defineModel<boolean>({ default: false });
-
-interface MenuItem {
-  icon: string;
-  label: string;
-  to: string;
-  separator: boolean;
-}
-
-const menuList: MenuItem[] = [
-  {
-    icon: 'home',
-    label: 'Home',
-    to: '/',
-    separator: false,
-  },
-  {
-    icon: 'person',
-    label: 'Profile',
-    to: '/profile',
-    separator: false,
-  },
-  {
-    icon: 'settings',
-    label: 'Settings',
-    to: '/settings',
-    separator: false,
-  },
-];
 </script>
