@@ -1,6 +1,6 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
-
+import { fileURLToPath } from 'url';
 import { defineConfig } from '#q-app/wrappers';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -41,7 +41,18 @@ export default defineConfig((/* ctx */) => {
       typescript: {
         strict: true,
         vueShim: true,
-        // extendTsConfig (tsConfig) {}
+        extendTsConfig(tsConfig) {
+          // Ensure compilerOptions exists
+          tsConfig.compilerOptions = tsConfig.compilerOptions || {};
+
+          // Ensure paths exists, then merge your alias safely
+          tsConfig.compilerOptions.paths = {
+            ...tsConfig.compilerOptions.paths,
+            '@components': ['./../src/components/index.ts'],
+            '@constants': ['./../src/constants/index.ts'],
+            '@/*': ['./../src/*'],
+          };
+        },
       },
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
@@ -61,6 +72,14 @@ export default defineConfig((/* ctx */) => {
       // distDir
 
       extendViteConf(viteConf) {
+        viteConf.resolve = viteConf.resolve || {};
+        viteConf.resolve.alias = {
+          ...viteConf.resolve.alias,
+          '@components': fileURLToPath(new URL('./src/components/index.ts', import.meta.url)),
+          '@constants': fileURLToPath(new URL('./src/constants/index.ts', import.meta.url)),
+          '@': fileURLToPath(new URL('./src', import.meta.url)),
+        };
+
         viteConf.plugins = viteConf.plugins || [];
         viteConf.plugins.push(tailwindcss());
       },
