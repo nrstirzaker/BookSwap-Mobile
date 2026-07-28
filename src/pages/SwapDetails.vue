@@ -18,7 +18,6 @@
           </div>
         </div>
 
-        <!-- Location Details & Action Buttons -->
         <div class="col-12 col-sm-6 col-md-5 content-col">
           <!-- Card Sheet wrapper ACTIVE ONLY ON MOBILE (xs) -->
           <div class="details-panel bg-white q-pa-md q-pa-sm-none">
@@ -77,7 +76,7 @@
             <q-separator class="q-my-md q-my-sm-lg" />
 
             <!-- About Section -->
-            <div>
+            <div class="q-mb-md">
               <div class="text-weight-bold text-grey-9 q-mb-xs fluid-subtitle">
                 About this location
               </div>
@@ -85,6 +84,29 @@
                 Welcome to ICARO Lounge. Check in to record your visit, update your location if
                 needed, or get directions directly from your current location.
               </p>
+            </div>
+
+            <!-- Opening Times Section -->
+            <div class="q-mb-md">
+              <div class="text-weight-bold text-grey-9 q-mb-xs fluid-subtitle">Opening Times</div>
+              <div class="row items-center text-grey-8 fluid-body">
+                <q-icon name="schedule" class="q-mr-xs text-primary fluid-icon" />
+                <span>Open daily: 8:00 AM - 5:00 PM</span>
+              </div>
+            </div>
+
+            <!-- Photos Section -->
+            <div>
+              <div class="text-weight-bold text-grey-9 q-mb-xs fluid-subtitle">Photos</div>
+              <div class="row q-col-gutter-xs">
+                <div v-for="(photo, index) in photos" :key="index" class="col-4">
+                  <q-img :src="photo" :ratio="1" class="photo-thumb rounded-borders" fit="cover">
+                    <template #loading>
+                      <q-spinner-dots color="white" size="1.5em" />
+                    </template>
+                  </q-img>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -101,6 +123,12 @@ const locationAddress = '43 Cosham, Portsmouth PO3 4EQ';
 const googleMapsUrl = computed(() => {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationAddress)}`;
 });
+
+const photos = [
+  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=400&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=400&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1471922694854-ff1b63b20054?q=80&w=400&auto=format&fit=crop',
+];
 </script>
 
 <style scoped>
@@ -141,6 +169,10 @@ const googleMapsUrl = computed(() => {
 
 .fluid-btn :deep(.q-icon) {
   font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+}
+
+.photo-thumb {
+  border-radius: 12px;
 }
 
 /* Mobile Layout (xs: < 600px) */
