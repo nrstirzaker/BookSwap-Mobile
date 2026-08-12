@@ -2,16 +2,15 @@
   <q-drawer
     v-model="drawerState"
     side="left"
-    :width="220"
+    :width="240"
     bordered
     overlay
     behavior="mobile"
     class="bg-grey-1"
   >
     <q-scroll-area class="fit">
-      <div class="q-pa-md row items-center justify-between border-b border-gray-200">
-        <div class="text-subtitle1 font-bold text-gray-700">Menu</div>
-        <q-btn round flat icon="close" @click="drawerState = false" />
+      <div class="q-pa-md border-b border-gray-200 text-right">
+        <div class="text-subtitle1 text-weight-bold text-grey-8 jus">Menu</div>
       </div>
 
       <q-list padding>
