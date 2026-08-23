@@ -135,20 +135,7 @@
 import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { AccessibilityFeatures, LocationImageUploader } from '@components';
-
-const LOCATION_TYPE_OPTIONS = [
-  { label: 'Outdoor Cabinet / Box', value: 'outdoor_box' },
-  { label: 'Community Center / Library', value: 'community_center' },
-  { label: 'Cafe / Business Host', value: 'cafe' },
-  { label: 'Public Bench / Shelf', value: 'public_shelf' },
-  { label: 'Other', value: 'other' },
-];
-
-const OPEN_HOURS_OPTIONS = [
-  { label: '24/7 Public Access', value: '24_7' },
-  { label: 'Business / Daylight Hours Only', value: 'daylight' },
-  { label: 'Restricted / Keycard Required', value: 'restricted' },
-];
+import { LOCATION_TYPE_OPTIONS, OPEN_HOURS_OPTIONS } from 'src/constants';
 
 const router = useRouter();
 const submitting = ref(false);
