@@ -1,22 +1,47 @@
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
+  // 1. Initial Screen when opening the app (Login)
   {
     path: '/',
+    name: 'login',
+    component: () => import('pages/LoginPage.vue'),
+  },
+
+  // 2. Main Application pages inside MainLayout
+  {
+    path: '/app',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
+      {
+        path: '',
+        name: 'home',
+        component: () => import('pages/IndexPage.vue'),
+      },
       {
         path: 'add',
         name: 'add-book',
         component: () => import('pages/AddBookPage.vue'),
       },
-      { path: 'bookswap/:id', component: () => import('pages/SwapDetails.vue') },
+      {
+        path: 'bookswap/:id',
+        name: 'swap-details',
+        component: () => import('pages/SwapDetails.vue'),
+      },
+      {
+        path: 'saved',
+        name: 'saved',
+        component: () => import('pages/IndexPage.vue'), // Need to replace with your SavedPage.vue when ready
+      },
+      {
+        path: 'profile',
+        name: 'profile',
+        component: () => import('pages/IndexPage.vue'), // Need to replace with your ProfilePage.vue when ready
+      },
     ],
   },
 
-  // Always leave this as last one,
-  // but you can also remove it
+  // 3. Catch-all 404
   {
     path: '/:catchAll(.*)*',
     component: () => import('pages/ErrorNotFound.vue'),
