@@ -11,7 +11,7 @@ const routes: RouteRecordRaw[] = [
         name: 'add-book',
         component: () => import('pages/AddBookPage.vue'),
       },
-      { path: 'swap/:id', component: () => import('pages/SwapDetails.vue') },
+      { path: 'bookswap/:id', component: () => import('pages/SwapDetails.vue') },
     ],
   },
 
