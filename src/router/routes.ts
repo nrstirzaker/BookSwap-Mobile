@@ -1,16 +1,21 @@
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
-  // 1. Initial Screen when opening the app (Login)
+  // 1. Initial Screen when opening the app (Login/Sign Up)
   {
-    path: '/',
+    path: '/login',
     name: 'login',
     component: () => import('pages/LoginPage.vue'),
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: () => import('pages/SignUpPage.vue'),
   },
 
   // 2. Main Application pages inside MainLayout
   {
-    path: '/app',
+    path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
