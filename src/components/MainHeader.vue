@@ -33,7 +33,7 @@
 
             <q-separator />
 
-            <q-item clickable v-close-popup>
+            <q-item clickable v-close-popup @click="handleLogout">
               <q-item-section avatar min-width="0">
                 <q-icon name="logout" color="negative" size="xs" />
               </q-item-section>
@@ -48,14 +48,20 @@
 
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
+import { useRouter } from 'vue-router';
 
 const $q = useQuasar();
+const router = useRouter();
 
 const emit = defineEmits<{
   (e: 'toggle-menu'): void;
 }>();
 
 const avatarUrl = 'https://cdn.quasar.dev/img/avatar.png';
+
+const handleLogout = async (): Promise<void> => {
+  await router.push({ name: 'login' });
+};
 </script>
 
 <style scoped>
