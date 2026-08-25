@@ -5,76 +5,23 @@
       Create Account
     </div>
 
-    <!-- Form Fields -->
+    <!-- Dynamic Form Fields -->
     <div class="full-width column q-gutter-y-md">
-      <div>
-        <div class="text-caption text-weight-bold text-grey-9 q-mb-xs">Full Name</div>
-        <q-input
-          v-model="fullName"
-          placeholder="Enter your full name"
-          outlined
-          dense
-          no-error-icon
-          class="custom-rounded-input"
-        />
-      </div>
-
-      <div>
-        <div class="text-caption text-weight-bold text-grey-9 q-mb-xs">Email</div>
-        <q-input
-          v-model="email"
-          placeholder="your.email@example.com"
-          type="email"
-          outlined
-          dense
-          no-error-icon
-          class="custom-rounded-input"
-        />
-      </div>
-
-      <div>
-        <div class="text-caption text-weight-bold text-grey-9 q-mb-xs">Handle</div>
-        <div class="row items-center no-wrap q-gutter-x-sm">
-          <q-input
-            v-model="handle"
-            placeholder="RockMainEasy"
-            outlined
-            dense
-            no-error-icon
-            class="col custom-rounded-input"
-          />
-          <q-avatar color="primary" text-color="white" size="36px" class="cursor-pointer">
+      <FormInput
+        v-for="field in signUpFields"
+        :key="field.key"
+        v-model="formData[field.key]"
+        :label="field.label"
+        :placeholder="field.placeholder"
+        :type="field.type"
+      >
+        <template v-if="field.hasTooltip" #append>
+          <q-avatar color="primary" text-color="white" size="24px" class="cursor-pointer">
             <span class="text-weight-bold text-caption">?</span>
             <q-tooltip class="bg-grey-9">Your unique username on BookSwap</q-tooltip>
           </q-avatar>
-        </div>
-      </div>
-
-      <div>
-        <div class="text-caption text-weight-bold text-grey-9 q-mb-xs">Password</div>
-        <q-input
-          v-model="password"
-          placeholder="••••••••"
-          type="password"
-          outlined
-          dense
-          no-error-icon
-          class="custom-rounded-input"
-        />
-      </div>
-
-      <div>
-        <div class="text-caption text-weight-bold text-grey-9 q-mb-xs">Confirm Password</div>
-        <q-input
-          v-model="confirmPassword"
-          placeholder="••••••••"
-          type="password"
-          outlined
-          dense
-          no-error-icon
-          class="custom-rounded-input"
-        />
-      </div>
+        </template>
+      </FormInput>
     </div>
 
     <!-- Terms Checkbox -->
@@ -100,7 +47,7 @@
     <!-- Footer Link -->
     <div class="text-caption text-grey-8 q-mt-md">
       Already have an account?
-      <router-link to="/auth/login" class="text-primary text-weight-bold no-decoration">
+      <router-link :to="{ name: 'login' }" class="text-primary text-weight-bold no-decoration">
         Sign In
       </router-link>
     </div>
@@ -108,16 +55,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import FormInput from 'components/FormInput.vue';
+
+interface SignUpFieldConfig {
+  key: keyof typeof formData;
+  label: string;
+  placeholder: string;
+  type?: 'text' | 'email' | 'password';
+  hasTooltip?: boolean;
+}
 
 const router = useRouter();
-const fullName = ref('');
-const email = ref('');
-const handle = ref('');
-const password = ref('');
-const confirmPassword = ref('');
 const agreeTerms = ref(false);
+
+const formData = reactive({
+  fullName: '',
+  email: '',
+  handle: '',
+  password: '',
+  confirmPassword: '',
+});
+
+const signUpFields: SignUpFieldConfig[] = [
+  { key: 'fullName', label: 'Full Name', placeholder: 'Enter your full name' },
+  { key: 'email', label: 'Email', placeholder: 'your.email@example.com', type: 'email' },
+  { key: 'handle', label: 'Handle', placeholder: 'RockMainEasy', hasTooltip: true },
+  { key: 'password', label: 'Password', placeholder: '••••••••', type: 'password' },
+  { key: 'confirmPassword', label: 'Confirm Password', placeholder: '••••••••', type: 'password' },
+];
 
 const handleSignUp = async (): Promise<void> => {
   await router.push({ name: 'home' });
@@ -127,9 +94,6 @@ const handleSignUp = async (): Promise<void> => {
 <style scoped>
 .no-decoration {
   text-decoration: none;
-}
-:deep(.custom-rounded-input .q-field__control) {
-  border-radius: 8px !important;
 }
 .custom-btn {
   border-radius: 8px;

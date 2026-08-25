@@ -1,31 +1,14 @@
 <template>
   <div class="full-width column items-center">
     <div class="full-width column q-gutter-y-md">
-      <div>
-        <div class="text-caption text-weight-bold text-grey-9 q-mb-xs">Email</div>
-        <q-input
-          v-model="email"
-          placeholder="your.email@example.com"
-          type="email"
-          outlined
-          dense
-          no-error-icon
-          class="custom-rounded-input"
-        />
-      </div>
-
-      <div>
-        <div class="text-caption text-weight-bold text-grey-9 q-mb-xs">Password</div>
-        <q-input
-          v-model="password"
-          placeholder="••••••••"
-          type="password"
-          outlined
-          dense
-          no-error-icon
-          class="custom-rounded-input"
-        />
-      </div>
+      <FormInput
+        v-for="field in loginFields"
+        :key="field.key"
+        v-model="formData[field.key]"
+        :label="field.label"
+        :placeholder="field.placeholder"
+        :type="field.type"
+      />
     </div>
 
     <q-btn
@@ -37,12 +20,12 @@
     />
 
     <div class="column items-center q-gutter-y-sm q-mt-xl text-caption text-grey-7">
-      <router-link to="/forgot-password" class="text-primary text-weight-medium no-decoration">
+      <router-link to="/auth/forgot-password" class="text-primary text-weight-medium no-decoration">
         Forgot Password?
       </router-link>
       <div>
         Don't have an account?
-        <router-link to="/signup" class="text-primary text-weight-bold no-decoration">
+        <router-link :to="{ name: 'signup' }" class="text-primary text-weight-bold no-decoration">
           Sign Up
         </router-link>
       </div>
@@ -54,12 +37,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import FormInput from 'components/FormInput.vue';
+
+interface FieldConfig {
+  key: keyof typeof formData;
+  label: string;
+  placeholder: string;
+  type?: 'text' | 'email' | 'password';
+}
 
 const router = useRouter();
-const email = ref('');
-const password = ref('');
+
+const formData = reactive({
+  email: '',
+  password: '',
+});
+
+const loginFields: FieldConfig[] = [
+  { key: 'email', label: 'Email', placeholder: 'your.email@example.com', type: 'email' },
+  { key: 'password', label: 'Password', placeholder: '••••••••', type: 'password' },
+];
 
 const handleLogin = async (): Promise<void> => {
   await router.push({ name: 'home' });
@@ -69,9 +68,6 @@ const handleLogin = async (): Promise<void> => {
 <style scoped>
 .no-decoration {
   text-decoration: none;
-}
-:deep(.custom-rounded-input .q-field__control) {
-  border-radius: 8px !important;
 }
 .custom-btn {
   border-radius: 8px;
