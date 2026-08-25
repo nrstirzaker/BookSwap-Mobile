@@ -1,22 +1,41 @@
 import type { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
-  // 1. Initial Screen when opening the app (Login/Sign Up)
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('pages/LoginPage.vue'),
-  },
-  {
-    path: '/signup',
-    name: 'signup',
-    component: () => import('pages/SignUpPage.vue'),
-  },
-
-  // 2. Main Application pages inside MainLayout
+  // Direct redirect to the actual child path or route name
   {
     path: '/',
+    redirect: { name: 'login' },
+  },
+
+  // Auth Routes
+  {
+    path: '/auth',
+    component: () => import('layouts/AuthLayout.vue'),
+    children: [
+      {
+        path: '',
+        redirect: { name: 'login' },
+      },
+      {
+        path: 'login',
+        name: 'login',
+        component: () => import('pages/LoginPage.vue'),
+        meta: { requiresGuest: true },
+      },
+      {
+        path: 'signup',
+        name: 'signup',
+        component: () => import('pages/SignUpPage.vue'),
+        meta: { requiresGuest: true },
+      },
+    ],
+  },
+
+  // Main App Routes
+  {
+    path: '/app',
     component: () => import('layouts/MainLayout.vue'),
+    meta: { requiresAuth: true },
     children: [
       {
         path: '',
@@ -32,23 +51,20 @@ const routes: RouteRecordRaw[] = [
         path: 'bookswap/:id',
         name: 'swap-details',
         component: () => import('pages/SwapDetails.vue'),
-      },
-      {
-        path: 'saved',
-        name: 'saved',
-        component: () => import('pages/IndexPage.vue'), // Need to replace with your SavedPage.vue when ready
-      },
-      {
-        path: 'profile',
-        name: 'profile',
-        component: () => import('pages/IndexPage.vue'), // Need to replace with your ProfilePage.vue when ready
+        props: true,
       },
     ],
   },
 
-  // 3. Catch-all 404
+  // Standalone Aliases (Only for convenience)
+  { path: '/login', redirect: '/auth/login' },
+  { path: '/signup', redirect: '/auth/signup' },
+  { path: '/home', redirect: '/app' },
+
+  // Catch-all 404
   {
     path: '/:catchAll(.*)*',
+    name: 'not-found',
     component: () => import('pages/ErrorNotFound.vue'),
   },
 ];
