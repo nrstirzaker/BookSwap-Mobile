@@ -160,7 +160,7 @@ async function submitBookSwap() {
   await new Promise((resolve) => setTimeout(resolve, 700));
   submitting.value = false;
   showSuccess.value = true;
-  setTimeout(() => void router.push('/'), 1200);
+  setTimeout(() => void router.push('/app'), 1200);
 }
 </script>
 
