@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-// Layout script remains light since route management handles active components
+// we wil have the api call here to check if the user is logged in or not and redirect accordingly
 </script>
 
 <style scoped>
