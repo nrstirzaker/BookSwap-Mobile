@@ -58,33 +58,18 @@
 import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import FormInput from 'components/FormInput.vue';
-
-interface SignUpFieldConfig {
-  key: keyof typeof formData;
-  label: string;
-  placeholder: string;
-  type?: 'text' | 'email' | 'password';
-  hasTooltip?: boolean;
-}
+import { signUpFields } from '@constants';
 
 const router = useRouter();
 const agreeTerms = ref(false);
 
-const formData = reactive({
+const formData = reactive<SignUpFormData>({
   fullName: '',
   email: '',
   handle: '',
   password: '',
   confirmPassword: '',
 });
-
-const signUpFields: SignUpFieldConfig[] = [
-  { key: 'fullName', label: 'Full Name', placeholder: 'Enter your full name' },
-  { key: 'email', label: 'Email', placeholder: 'your.email@example.com', type: 'email' },
-  { key: 'handle', label: 'Handle', placeholder: 'RockMainEasy', hasTooltip: true },
-  { key: 'password', label: 'Password', placeholder: '••••••••', type: 'password' },
-  { key: 'confirmPassword', label: 'Confirm Password', placeholder: '••••••••', type: 'password' },
-];
 
 const handleSignUp = async (): Promise<void> => {
   await router.push({ name: 'home' });
