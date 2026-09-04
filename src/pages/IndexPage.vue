@@ -8,7 +8,10 @@
       <router-link
         v-for="item in filteredFavourites"
         :key="item.title"
-        :to="`/swap/${item.title.toLowerCase().replace(/\s+/g, '-')}`"
+        :to="{
+          name: 'swap-details',
+          params: { id: item.title.toLowerCase().replace(/\s+/g, '-') },
+        }"
         class="no-underline"
       >
         <SwapCard :title="item.title" :image="item.img" />
@@ -40,7 +43,6 @@ const filteredFavourites = computed<FavouriteItem[]>(() => {
 
   return favourites.filter((item: FavouriteItem) => {
     const matchesTitle = item.title.toLowerCase().includes(query);
-
     return matchesTitle;
   });
 });
