@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import FormInput from 'components/FormInput.vue';
+import { FormInput } from '@components';
 
 interface FieldConfig {
   key: keyof typeof formData;

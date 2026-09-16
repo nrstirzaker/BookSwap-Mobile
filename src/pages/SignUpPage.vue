@@ -57,7 +57,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import FormInput from 'components/FormInput.vue';
+import { FormInput } from '@components';
 import { signUpFields } from '@constants';
 
 const router = useRouter();

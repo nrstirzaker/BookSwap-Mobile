@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { useImageUpload } from '../composables/useImageUpload';
+import { useImageUpload } from '@composables';
 
 const { fileInput, coverPreview, triggerFilePicker, handleFileSelect, removeCover } =
   useImageUpload();
