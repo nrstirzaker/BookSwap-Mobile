@@ -20,7 +20,9 @@ export function useImageUpload() {
   function handleFileSelect(e: Event) {
     const target = e.target as HTMLInputElement;
     const file = target.files?.[0];
-    if (file) setCover(file);
+    if (file) {
+      setCover(file);
+    }
   }
 
   function removeCover() {

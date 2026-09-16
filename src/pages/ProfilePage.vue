@@ -200,12 +200,12 @@ const handleGoBack = (): void => {
   if (window.history.length > 1) {
     router.back();
   } else {
-    router.push({ name: 'home' });
+    void router.push({ name: 'home' });
   }
 };
 
 const showAllDestinations = (): void => {
-  router.push({ name: 'destinations' });
+  void router.push({ name: 'destinations' });
 };
 
 const handleLogout = async (): Promise<void> => {
