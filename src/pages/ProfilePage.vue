@@ -160,7 +160,6 @@ const profileFields: FieldConfig[] = [
 ];
 
 const profileSettings = [
-  { label: 'Personal Information', icon: 'person' },
   { label: 'Notifications', icon: 'notifications' },
   { label: 'Wishlist', icon: 'favorite_border' },
   { label: 'Saved Locations', icon: 'place' },
