@@ -8,7 +8,7 @@
       <router-link
         v-for="item in filteredFavourites"
         :key="item.title"
-        :to="`/swap/${item.title.toLowerCase().replace(/\s+/g, '-')}`"
+        :to="`/bookswap/${item.title.toLowerCase().replace(/\s+/g, '-')}`"
         class="no-underline"
       >
         <SwapCard :title="item.title" :image="item.img" />
