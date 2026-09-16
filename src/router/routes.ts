@@ -56,10 +56,18 @@ const routes: RouteRecordRaw[] = [
     ],
   },
 
+  {
+    path: '/app/profile',
+    name: 'profile',
+    component: () => import('pages/ProfilePage.vue'),
+    meta: { requiresAuth: true },
+  },
+
   // Standalone Aliases (Only for convenience)
   { path: '/login', redirect: '/auth/login' },
   { path: '/signup', redirect: '/auth/signup' },
   { path: '/home', redirect: '/app' },
+  { path: '/profile', redirect: '/app/profile' },
 
   // Catch-all 404
   {
