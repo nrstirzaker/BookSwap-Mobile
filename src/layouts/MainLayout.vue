@@ -16,7 +16,6 @@
       <q-tabs v-model="activeTab" no-caps active-color="primary" indicator-color="transparent">
         <q-route-tab name="home" :to="{ name: 'home' }" icon="home" label="Home" exact />
         <q-route-tab name="new" :to="{ name: 'add-book' }" icon="add" label="New" />
-        <q-route-tab name="saved" :to="{ name: 'saved' }" icon="bookmark_border" label="Saved" />
         <q-route-tab
           name="profile"
           :to="{ name: 'profile' }"
