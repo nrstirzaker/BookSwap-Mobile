@@ -45,7 +45,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'add',
         name: 'add-book',
-        component: () => import('pages/AddBookPage.vue'),
+        component: () => import('pages/AddBookSwapPage.vue'),
       },
       {
         path: 'bookswap/:id',
