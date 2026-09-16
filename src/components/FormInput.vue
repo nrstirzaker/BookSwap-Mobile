@@ -27,6 +27,8 @@ const props = defineProps<{
   label?: string;
 }>();
 
+// This is not for the validation but for the v-model binding to work properly with the parent component.
+// The parent component will pass down the modelValue prop and listen for the update:modelValue event to update its own state.
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void;
 }>();
