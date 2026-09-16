@@ -135,7 +135,7 @@
 import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { AccessibilityFeatures, LocationImageUploader } from '@components';
-import { LOCATION_TYPE_OPTIONS, OPEN_HOURS_OPTIONS } from 'src/constants';
+import { LOCATION_TYPE_OPTIONS, OPEN_HOURS_OPTIONS } from '@constants';
 
 const router = useRouter();
 const submitting = ref(false);

@@ -49,6 +49,8 @@ export default defineConfig((/* ctx */) => {
           tsConfig.compilerOptions.paths = {
             ...tsConfig.compilerOptions.paths,
             '@components': ['./../src/components/index.ts'],
+            '@composables': ['./../src/composables/index.ts'],
+
             '@constants': ['./../src/constants/index.ts'],
             '@/*': ['./../src/*'],
           };
@@ -76,6 +78,7 @@ export default defineConfig((/* ctx */) => {
         viteConf.resolve.alias = {
           ...viteConf.resolve.alias,
           '@components': fileURLToPath(new URL('./src/components/index.ts', import.meta.url)),
+          '@composables': fileURLToPath(new URL('./src/composables/index.ts', import.meta.url)),
           '@constants': fileURLToPath(new URL('./src/constants/index.ts', import.meta.url)),
           '@': fileURLToPath(new URL('./src', import.meta.url)),
         };
